@@ -4,4 +4,6 @@ class Post < ActiveRecord::Base
   # when you change the association name,
   # you have to be explicit about the foreign name and class name
   has_many :comments
+  has_many :post_categories
+  has_many :categories, through: :post_categories
 end
