@@ -3,5 +3,6 @@ PostitTemplate::Application.routes.draw do
 
   # get '/creators' => 'creators#index'
   resources :posts, except: [:destroy]
-  resources :creators, except: [:destroy]
+  resources :categories, only: [:new, :create, :show]
+  # resources :creators, except: [:destroy]
 end
