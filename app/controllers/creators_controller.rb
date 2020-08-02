@@ -1,10 +1,10 @@
-class PostsController < ApplicationController
+class CreatorsController < ApplicationController
   def index
-    @posts = Post.all
+    @creators = User.all
   end
 
   def show
-    @post = Post.find(params[:id])
+    @creator = User.find(params[:id])
   end
 
   def new
