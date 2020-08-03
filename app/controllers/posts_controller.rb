@@ -18,7 +18,7 @@ class PostsController < ApplicationController
 
     if @post.save
       flash[:notice] = "Your post was created"
-      redirect_to post_path
+      redirect_to post_path(@post)
     else
       render :new
     end
@@ -28,7 +28,6 @@ class PostsController < ApplicationController
   end
 
   def update
-
     if @post.update(post_params)
       flash[:notice] = "This post was updated"
       redirect_to post_path(@post)
@@ -40,7 +39,7 @@ class PostsController < ApplicationController
   private
 
   def post_params
-    params.require(:post).permit(:title, :url, :description)
+    params.require(:post).permit(:title, :url, :description, category_ids: [])
   end
 
   def set_post
