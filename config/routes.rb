@@ -9,6 +9,10 @@ PostitTemplate::Application.routes.draw do
   # get '/creators' => 'creators#index'
   resources :posts, except: [:destroy] do
     resources :comments, only: [:create]
+
+    member do
+      post 'vote'
+    end
   end
   resources :categories, only: [:new, :create, :show]
   # resources :creators, except: [:destroy]

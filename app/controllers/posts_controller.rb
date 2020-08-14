@@ -1,9 +1,9 @@
 class PostsController < ApplicationController
-  before_action :set_post, only: [:show, :edit, :update]
+  before_action :set_post, only: [:show, :edit, :update, :vote]
   before_action :require_user, except: [:show, :index]
 
   def index
-    @posts = Post.all
+    @posts = Post.all.sort_by { |x| -x.total_votes }
   end
 
   def show
@@ -32,10 +32,18 @@ class PostsController < ApplicationController
   def update
     if @post.update(post_params)
       flash[:notice] = "This post was updated"
-      redirect_to post_path(@post)
+      redirect_to :back
     else
       render :edit
     end
+  end
+
+  def vote
+
+
+    Vote.create(voteable: @post, creator: current_user, vote: params[:vote])
+    flash[:notice] = "Your vote was counted"
+    redirect_to posts_path
   end
 
   private
