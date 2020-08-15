@@ -39,15 +39,14 @@ class PostsController < ApplicationController
   end
 
   def vote
-    binding.prey
-    Vote.create(voteable: @post, creator: current_user, vote: params[:vote])
+    vote = Vote.create(voteable: @post, creator: current_user, vote: params[:vote])
     if vote.valid?
       flash[:notice] = "Your vote was counted"
-      redirect_to :back
     else
       flash[:error] = "You can only vote on a post once"
-      redirect_to :back
     end
+
+    redirect_to :back
   end
 
   private

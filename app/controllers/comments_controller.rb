@@ -18,7 +18,7 @@ class CommentsController < ApplicationController
 
   def vote
     comment = Comment.find(params[:id])
-    Vote.create(voteable: comment, creator: current_user, vote: params[:vote])
+    vote = Vote.create(voteable: comment, creator: current_user, vote: params[:vote])
     if vote.valid?
       flash[:notice] = "Your vote was counted"
       redirect_to :back
